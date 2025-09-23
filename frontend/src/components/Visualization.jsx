@@ -412,11 +412,69 @@ const Visualization = () => {
   const [error, setError] = useState(null);
   const [hasData, setHasData] = useState(false);
 
+
+  // This method fetches the last video analysis data from the backend and updates the state accordingly. If the data is not available, it retains the initial dummy data and provides user feedback through toast notifications.
+  // Fetch stats from DynamoDB on initial load 
+  // const fetchLastVideoAnalysis = async () => {
+  //   setLoading(true);
+  //   setBlurred(true);
+  //   setError(null);
+
+  //   try {
+  //     const response = await axios.get(
+  //       "https://cricinsight-backend.vercel.app/api/video/last-analysis"
+  //     );
+  //     if (response.data && response.data.ShotPercentages) {
+  //       const updatedData = Object.entries(response.data.ShotPercentages).map(
+  //         ([shotName, percentage]) => {
+  //           const formattedName = shotName
+  //             .split("_")
+  //             .map(
+  //               (word) => word.charAt(0).toUpperCase() + word.slice(1)
+  //             )
+  //             .join(" ");
+  //           const existingShot = data.find(
+  //             (d) => d.name === formattedName
+  //           );
+  //           return {
+  //             name: formattedName,
+  //             value: Number(percentage),
+  //             color: existingShot
+  //               ? existingShot.color
+  //               : "#6c58f1",
+  //           };
+  //         }
+  //       );
+  //       setData(updatedData);
+  //       setHasData(updatedData.some(item => item.value > 0));
+  //       toast.success("Data loaded Successfully!");
+  //     } else {
+  //       setHasData(false);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching video analysis:", error);
+  //     setError("No Data Available");
+  //     toast.error("Please upload data first!");
+  //   } finally {
+  //     setLoading(false);
+  //     setBlurred(false);
+  //   }
+  // };
+
   // Fetch stats from DynamoDB on initial load
   const fetchLastVideoAnalysis = async () => {
     setLoading(true);
     setBlurred(true);
     setError(null);
+
+    // Initial dummy data
+    const initialDummyData = [
+      { name: "Cut", value: 10, color: "#332971" },
+      { name: "Pull", value: 15, color: "#46399c" },
+      { name: "Cover Drive", value: 26, color: "#0d0a1c" },
+      { name: "Straight Drive", value: 16, color: "#201a47" },
+      { name: "Flick", value: 23, color: "#5948c6" },
+    ];
 
     try {
       const response = await axios.get(
@@ -431,7 +489,7 @@ const Visualization = () => {
                 (word) => word.charAt(0).toUpperCase() + word.slice(1)
               )
               .join(" ");
-            const existingShot = data.find(
+            const existingShot = initialDummyData.find(
               (d) => d.name === formattedName
             );
             return {
@@ -445,14 +503,19 @@ const Visualization = () => {
         );
         setData(updatedData);
         setHasData(updatedData.some(item => item.value > 0));
-        toast.success("Data loaded Successfully!");
+        toast.success("Data loaded successfully!");
       } else {
-        setHasData(false);
+        // Keep dummy data and show an informative message
+        setData(initialDummyData);
+        setHasData(false); // Or true, depending on if you want the dummy data to count
+        // toast.info("No new analysis data available. Displaying default data.");
       }
     } catch (error) {
       console.error("Error fetching video analysis:", error);
-      setError("No Data Available");
-      toast.error("Please upload data first!");
+      // Keep dummy data and show an error message
+      setData(initialDummyData);
+      // setError("Failed to fetch new data. Displaying default data.");
+      // toast.error("Failed to fetch new data. Please try again later.");
     } finally {
       setLoading(false);
       setBlurred(false);

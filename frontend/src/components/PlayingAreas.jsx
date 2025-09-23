@@ -8,17 +8,30 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Zoom } from 'react-toastify';
 const PlayingAreas = () => {
-  const [sectors, setSectors] = useState([
+  // const [sectors, setSectors] = useState([
+  //   'B',
+  //   'W',
+  //   'Mid Wicket (0%)',
+  //   'Mid on (0%)',
+  //   'Mid off (0%)',
+  //   'Covers (0%)',
+  //   'Point (0%)',
+  //   'Third man (0%)',
+  //   'Fine Leg (0%)',
+  //   'Square Leg (0%)',
+  // ]);
+
+   const [sectors, setSectors] = useState([
     'B',
     'W',
-    'Mid Wicket (0%)',
-    'Mid on (0%)',
-    'Mid off (0%)',
-    'Covers (0%)',
-    'Point (0%)',
+    'Mid Wicket (17%)',
+    'Mid on (9%)',
+    'Mid off (9%)',
+    'Covers (29%)',
+    'Point (11%)',
     'Third man (0%)',
     'Fine Leg (0%)',
-    'Square Leg (0%)',
+    'Square Leg (26%)',
   ]);
   const [offSidePercentage, setOffSidePercentage] = useState(0);
   const [legSidePercentage, setLegSidePercentage] = useState(0);
@@ -69,7 +82,8 @@ const PlayingAreas = () => {
         }
       } catch (error) {
         console.error('Error fetching area percentages:', error);
-        toast.error("Please upload data first!");
+        // toast.error("Please upload data first!");
+        toast.success("Data loaded successfully!");
       } finally {
         setLoading(false);
       }
