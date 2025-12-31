@@ -33,9 +33,9 @@ const PlayingAreas = () => {
     'Fine Leg (0%)',
     'Square Leg (26%)',
   ]);
-  const [offSidePercentage, setOffSidePercentage] = useState(0);
-  const [legSidePercentage, setLegSidePercentage] = useState(0);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [offSidePercentage, setOffSidePercentage] = useState(49);
+  const [legSidePercentage, setLegSidePercentage] = useState(51);
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchAreaPercentages = async () => {
