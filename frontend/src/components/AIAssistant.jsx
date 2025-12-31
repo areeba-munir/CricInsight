@@ -117,6 +117,7 @@ const AIAssistant = () => {
   
       // Existing Gemini API call logic
       const apiKey = import.meta.env.VITE_APP_GEMINI_API_KEY;
+      const MODEL = "gemini-1.5-flash";
       const response = await axios.post(
         `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
         {
