@@ -34,7 +34,7 @@ Cricket players, especially amateurs, lack access to expert coaching and insight
 
 ## 📸 Screenshots
 
-![Landing-page](https://github.com/user-attachments/assets/557d11ea-f61d-4a21-a545-1fc58219ceb5)
+![Landing-page](https://github.com/areeba-munir/CricInsight/blob/main/landing-page.png)
 
 ### Login
 ![Login](https://github.com/user-attachments/assets/53591359-6e12-4781-92bf-e91fb9fbf6f5)
