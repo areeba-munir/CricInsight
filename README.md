@@ -36,29 +36,29 @@ Cricket players, especially amateurs, lack access to expert coaching and insight
 
 ![Landing-page](https://github.com/areeba-munir/CricInsight/blob/main/landing-page.png)
 
-### Login
-![Login](https://github.com/user-attachments/assets/53591359-6e12-4781-92bf-e91fb9fbf6f5)
-
 ### Register
-![Signup](https://github.com/user-attachments/assets/c7695312-56bb-4fe5-9204-18d07c20046f)
+![Signup](https://github.com/areeba-munir/CricInsight/blob/main/signup.png)
+
+### Login
+![Login](https://github.com/areeba-munir/CricInsight/blob/main/login.png)
 
 ### Video Insights
-![Video-insight](https://github.com/user-attachments/assets/111e2897-c41d-4f8e-919b-67993f558b32)
+![Video-insight](https://github.com/areeba-munir/CricInsight/blob/main/video-insights.png)
 
 ### Visualization
-![Visualization](https://github.com/user-attachments/assets/ff2d52be-22e1-43bb-8e15-93141264c7de)
+![Visualization](https://github.com/areeba-munir/CricInsight/blob/main/visualization.png)
 
 ### Playing Areas
-![Playing-areas](https://github.com/user-attachments/assets/d474afe2-88a2-484d-8b61-71bad65d1606)
+![Playing-areas](https://github.com/areeba-munir/CricInsight/blob/main/playing-areas.png)
 
 ### Payment Gateway
-![Payment-Gateway](https://github.com/user-attachments/assets/a18a3a7c-2cc8-4186-8417-e4dfbfbae0e9)
+![Payment-Gateway](https://github.com/areeba-munir/CricInsight/blob/main/payment-gateway.png)
 
 ### AI Assistant
-![AI Assistant](https://github.com/user-attachments/assets/ad029c66-2b51-4348-bc74-4fd7d5ac0012)
+![AI Assistant](https://github.com/areeba-munir/CricInsight/blob/main/ai-assistant.png)
 
 ### Reviews and Feedback
-![Reviews](https://github.com/user-attachments/assets/8db0648c-075e-4bcf-878d-a566a4bd1e51)
+![Reviews](https://github.com/areeba-munir/CricInsight/blob/main/feedback.png)
 
 
 ## ⚙️ How to Install and Setup
@@ -96,12 +96,5 @@ If you'd like to contribute to this project, please open an issue or submit a pu
 
 Don' forget to star ⭐ the repo, if you liked it. 
 
-Connect me on <a href="https://www.linkedin.com/in/daoud-hussain/" target="_blank">LinkedIn</a> and <a href="https://medium.com/@dev.daoudhussain" target="_blank">Medium</a>  <br>
+Connect me on <a href="https://www.linkedin.com/in/areeba-munir-044882258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a><br>
 
-## Contributers
-<a href = "https://daoudhussain.netlify.app/">
-  <img src = "https://contrib.rocks/image?repo=Daoud-Hussain/Reddit-Clone-on-K8s"/>
-</a>
-<a href = "https://github.com/Zohaib-Munir/">
-  <img src = "https://contrib.rocks/image?repo=Zohaib-Munir/in_app_purchases"/>
-</a>
