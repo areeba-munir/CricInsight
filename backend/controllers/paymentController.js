@@ -1,6 +1,6 @@
-const Stripe = require("stripe");
-require("dotenv").config();
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+// const Stripe = require("stripe");
+// require("dotenv").config();
+// const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Create a Stripe checkout session
 const checkoutSession = async (req, res) => {

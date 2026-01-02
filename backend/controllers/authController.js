@@ -116,7 +116,7 @@ exports.resetPassword = async (req, res) => {
 };
 
 // Google login
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+/* const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 exports.googleLogin = async (req, res) => {
   const { token } = req.body;
@@ -133,7 +133,7 @@ exports.googleLogin = async (req, res) => {
     if (!user) {
       user = new UserModel({ email, name });
       await user.save();
-    }
+    } 
 
     res.status(200).json({ email });
   } catch (error) {
@@ -141,9 +141,10 @@ exports.googleLogin = async (req, res) => {
     res.status(500).json({ message: "Google login failed" });
   }
 };
-
+*/
 
 // Facebook Login Strategy Configuration
+/*
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
@@ -172,4 +173,4 @@ async (accessToken, refreshToken, profile, done) => {
   }
 }
 ));
-
+*/

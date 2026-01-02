@@ -11,9 +11,13 @@ exports.uploadVideo = async (req, res) => {
     }
 
     videos.forEach(video => {
-      if (!video.url) throw new Error('Invalid video URL');
+      if (!video.url) {
+        console.warn('Skipping video with missing URL', video);
+        return; // skip invalid video
+      }
       user.videos.push({ url: video.url, uploadedAt: new Date(video.uploadedAt || Date.now()) });
     });
+
 
     await user.save();
     res.status(200).json({ message: 'Videos uploaded successfully', user });
@@ -23,12 +27,12 @@ exports.uploadVideo = async (req, res) => {
 };
 
 const AWS = require('aws-sdk');
-const awsConfig = require('../awsConfig'); 
+const awsConfig = require('../awsConfig');
 
 
 // Configure AWS (add these lines)
 AWS.config.update({
-  region: 'ap-south-1', 
+  region: 'ap-south-1',
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });

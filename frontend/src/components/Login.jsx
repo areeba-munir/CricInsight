@@ -75,7 +75,7 @@ const Login = () => {
       className: "toast-message" 
     });
   
-    axios.post('https://cricinsight-backend.vercel.app/api/auth/google-login', { token: googleToken })
+    axios.post('http://localhost:3001/api/auth/login', { token: googleToken })
       .then((res) => {
         const userEmail = res.data.email;
         localStorage.setItem('userEmail', userEmail);

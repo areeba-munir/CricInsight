@@ -1,11 +1,20 @@
+// require('dotenv').config(); // <-- must be at the very top
+// const express = require('express');
+// const cors = require('cors');
+// const dotenv = require('dotenv');
+// const passport = require('passport');
+// const session = require('express-session');
+
+
+require('dotenv').config(); // <-- only once, at the very top
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
 const passport = require('passport');
 const session = require('express-session');
+const UserModel = require('./models/User'); // <-- import your User model
 
 // Environment variables
-dotenv.config();
+// dotenv.config();
 
 const app = express();
 
@@ -21,7 +30,7 @@ app.use(cors({
 
 // Session middleware (required for passport)
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || 'mydevsecret', // fallback
   resave: false,
   saveUninitialized: false
 }));

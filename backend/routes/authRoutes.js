@@ -23,21 +23,21 @@ router.post('/forgot-password', forgotPassword);
 router.post('/reset-password/:token', resetPassword);
 
 // Google login
-router.post('/google-login', googleLogin);
+// router.post('/google-login', googleLogin);
 
 // Facebook login
-router.get('/facebook', passport.authenticate('facebook', {
-    scope: ['email']
-}));
+// router.get('/facebook', passport.authenticate('facebook', {
+//     scope: ['email']
+// }));
 
-router.get('/facebook/callback',
-    passport.authenticate('facebook', {
-        failureRedirect: 'http://localhost:5173/login',
-        session: false
-    }),
-    (req, res) => {
-        res.redirect(`http://localhost:5173/dashboard?email=${req.user.email}`);
-    }
-);
+// router.get('/facebook/callback',
+//     passport.authenticate('facebook', {
+//         failureRedirect: 'http://localhost:5173/login',
+//         session: false
+//     }),
+//     (req, res) => {
+//         res.redirect(`http://localhost:5173/dashboard?email=${req.user.email}`);
+//     }
+// );
 
 module.exports = router;

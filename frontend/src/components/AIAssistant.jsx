@@ -244,7 +244,7 @@ const AIAssistant = () => {
   <Box id="sample-inputs">
     <Grid container spacing={2}>
       {[
-        "Tell me about the playing areas I need to work on?",
+        ,
         "Walk me through how to play pace bowling?",
         "Tell me about all the shots I play and which shots I need to practise?",
         "Tell me about my cover drive and its areas of improvements?",

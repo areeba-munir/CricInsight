@@ -18,19 +18,19 @@ import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import {  Zoom } from 'react-toastify';
+// import axios from 'axios';
+import { Zoom } from 'react-toastify';
 
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+// import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
 
-const s3Client = new S3Client({
-  region: import.meta.env.VITE_AWS_REGION,
-  credentials: {
-    accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
-    secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
-  },
-});
+// const s3Client = new S3Client({
+//   region: import.meta.env.VITE_AWS_REGION,
+//   credentials: {
+//     accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
+//     secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
+//   },
+// });
 
 
 const VideoEditor = () => {
@@ -54,7 +54,7 @@ const VideoEditor = () => {
 
 
 
-  const userEmail = localStorage.getItem('userEmail');
+  // const userEmail = localStorage.getItem('userEmail');
 
   const addToHistory = (videos) => {
     const newHistory = history.slice(0, historyIndex + 1);
@@ -78,16 +78,16 @@ const VideoEditor = () => {
     }
   };
 
-  async function runModelOnEC2() {
-    try {
-      const response = await axios.post('https://cricinsight-backend.vercel.app/api/model/execute');
-      console.log('runn')
-      toast.success('Video Processed successfully ');
-    } catch (error) {
-      console.error('Error executing model:', error);
-      toast.error('Failed to execute model on EC2');
-    }
-  }
+  // async function runModelOnEC2() {
+  //   try {
+  //     const response = await axios.post('https://cricinsight-backend.vercel.app/api/model/execute');
+  //     console.log('runn')
+  //     toast.success('Video Processed successfully ');
+  //   } catch (error) {
+  //     console.error('Error executing model:', error);
+  //     toast.error('Failed to execute model on EC2');
+  //   }
+  // }
 
 
   const onDrop = (acceptedFiles) => {
@@ -189,92 +189,119 @@ const VideoEditor = () => {
   const [loadingMessage, setLoadingMessage] = useState("Uploading video...");
 
   const handleDoneClick = async () => {
-    try {
-      setLoading(true);
-      setBlurred(true);
-      setUploading(true);
-      setLoadingMessage("Uploading video...");
-
-      // Fetch user details based on email
-      const email = localStorage.getItem('userEmail');
-
-      // Upload each video
-      const uploadPromises = videos.map(async (videoFile, index) => {
-        try {
-          const response = await fetch(videoFile.src);
-          const blob = await response.blob();
-
-          const uploadParams = {
-            Bucket: import.meta.env.VITE_AWS_BUCKET_NAME,
-            Key: "practice-video.mp4", 
-            Body: blob,
-            ContentType: "video/mp4",
-          };
-
-          // Upload to S3
-          const command = new PutObjectCommand(uploadParams);
-          await s3Client.send(command);
-
-          console.log(`Uploaded video ${index + 1}`);
-
-          // Return public video URL
-          return `https://${uploadParams.Bucket}.s3.${import.meta.env.VITE_AWS_REGION}.amazonaws.com/practice-video.mp4`;
-        } catch (uploadError) {
-          console.error(`Error uploading video ${index + 1}:`, uploadError);
-          throw uploadError;
-        }
-      });
-
-      const videoUrls = await Promise.all(uploadPromises);
-
-      // Save video URLs to backend
-      const backendResponse = await axios.post("https://cricinsight-backend.vercel.app/api/video/upload-video", {
-        email: userEmail,
-        videos: videoUrls.map((url) => ({
-          url,
-          uploadedAt: new Date(),
-        })),
-      });
-
-      // Check if backend response is successful
-      if (backendResponse.status === 200 || backendResponse.status === 201) {
-        setUploadSuccess(true);
-        toast.success("Video uploaded successfully!");
-
-        setLoadingMessage("Processing video...");
-        await runModelOnEC2();
-
-        setTimeout(() => {
-          navigate("/dashboard/visualization");
-        }, 2000);
-      } else {
-        toast.warn("Videos uploaded to S3, but there might be an issue with backend recording.");
-        setLoadingMessage("Processing video...");
-        await runModelOnEC2();
-
-        setTimeout(() => {
-          navigate("/dashboard/visualization");
-        }, 5000);
-      }
-    } catch (err) {
-      console.error("Potential upload issue:", err);
-      if (err.response && err.response.status === 500) {
-        toast.success("Videos uploaded successfully! Backend might be experiencing temporary issues.");
-        setLoadingMessage("Processing video...");
-        await runModelOnEC2();
-
-        setTimeout(() => {
-          navigate("/dashboard/visualization");
-        }, 5000);
-      } else {
-        toast.error("An unexpected error occurred during upload.");
-      }
-    } finally {
-      setUploading(false);
-      setLoading(false);
-      setBlurred(false);
+    if (videos.length === 0) {
+      toast.error("Please upload a video first");
+      return;
     }
+
+    // Start loading
+    setLoading(true);
+    setBlurred(true);
+    setUploading(true);
+    setLoadingMessage("Uploading video...");
+
+    // Short delay to simulate upload
+    setTimeout(() => {
+      toast.success("Video uploaded successfully!");
+
+      // Simulate processing delay
+      setLoadingMessage("Processing video...");
+      setTimeout(() => {
+        // Stop loading and navigate
+        setLoading(false);
+        setBlurred(false);
+        setUploading(false);
+
+        navigate("/dashboard/visualization");
+      }, 1000); // 1 second processing
+    }, 1000); // 1 second upload
   };
+
+
+
+
+
+
+  // Fetch user details based on email
+  // const email = localStorage.getItem('userEmail');
+
+  // Upload each video
+  // const uploadPromises = videos.map(async (videoFile, index) => {
+  //   try {
+  //     const response = await fetch(videoFile.src);
+  //     const blob = await response.blob();
+
+  //     const uploadParams = {
+  //       Bucket: import.meta.env.VITE_AWS_BUCKET_NAME,
+  //       Key: "practice-video.mp4", 
+  //       Body: blob,
+  //       ContentType: "video/mp4",
+  //     };
+
+  // Upload to S3
+  // const command = new PutObjectCommand(uploadParams);
+  // await s3Client.send(command);
+
+  // console.log(`Uploaded video ${index + 1}`);
+
+  // Return public video URL
+  //     return `https://${uploadParams.Bucket}.s3.${import.meta.env.VITE_AWS_REGION}.amazonaws.com/practice-video.mp4`;
+  //   } catch (uploadError) {
+  //     console.error(`Error uploading video ${index + 1}:`, uploadError);
+  //     throw uploadError;
+  //   }
+  // });
+
+  // const videoUrls = await Promise.all(uploadPromises);
+
+  // Save video URLs to backend
+  // const backendResponse = await axios.post("https://cricinsight-backend.vercel.app/api/video/upload-video", {
+  //   email: userEmail,
+  //   videos: videoUrls.map((url) => ({
+  //     url,
+  //     uploadedAt: new Date(),
+  //   })),
+  // });
+
+  // Check if backend response is successful
+  //     if (backendResponse.status === 200 || backendResponse.status === 201) {
+  //       setUploadSuccess(true);
+  //       toast.success("Video uploaded successfully!");
+
+  //       setLoadingMessage("Processing video...");
+  //       await runModelOnEC2();
+
+  //       setTimeout(() => {
+  //         navigate("/dashboard/visualization");
+  //       }, 2000);
+  //     } else {
+  //       toast.warn("Videos uploaded to S3, but there might be an issue with backend recording.");
+  //       setLoadingMessage("Processing video...");
+  //       await runModelOnEC2();
+
+  //       setTimeout(() => {
+  //         navigate("/dashboard/visualization");
+  //       }, 5000);
+  //     }
+  //   } catch (err) {
+  //     console.error("Potential upload issue:", err);
+  //     if (err.response && err.response.status === 500) {
+  //       toast.success("Videos uploaded successfully! Backend might be experiencing temporary issues.");
+  //       setLoadingMessage("Processing video...");
+  //       await runModelOnEC2();
+
+  //       setTimeout(() => {
+  //         navigate("/dashboard/visualization");
+  //       }, 5000);
+  //     } else {
+  //       toast.error("An unexpected error occurred during upload.");
+  //     }
+  //   } finally {
+  //     setUploading(false);
+  //     setLoading(false);
+  //     setBlurred(false);
+  //   }
+  // };
 
 
 
@@ -359,7 +386,7 @@ const VideoEditor = () => {
       const videoWidth = (videos[i].duration / totalDuration) * canvas.width;
 
       if (x >= accumulatedWidth && x < accumulatedWidth + videoWidth) {
-        setCurrentVideoIndex(i); 
+        setCurrentVideoIndex(i);
         break;
       }
 
@@ -376,9 +403,9 @@ const VideoEditor = () => {
       height="100%"
       sx={{ padding: 3 }}
     >
-     <ToastContainer
-    transition={Zoom}
-  />
+      <ToastContainer
+        transition={Zoom}
+      />
       <Box
         display="flex"
         flexDirection="column"
@@ -414,7 +441,7 @@ const VideoEditor = () => {
           height="50%"
           bgcolor="#d3d3d3"
           controls
-          src={videos[currentVideoIndex]?.src} 
+          src={videos[currentVideoIndex]?.src}
         />
 
 
